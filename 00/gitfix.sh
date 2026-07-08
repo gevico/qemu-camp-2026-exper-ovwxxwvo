@@ -10,8 +10,8 @@ function git_fix() {
 
     echo "---------- ---------- ---------- ----------"
     # git stash
-    git fetch origin
-    git reset --hard origin/main
+    git fetch upstream
+    git reset --hard upstream/main
     echo "---------- ---------- ---------- ----------"
     git checkout -b "$branch"
 

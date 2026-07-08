@@ -4,6 +4,7 @@ script_dir=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 cd "${script_dir}" && cd ../ && pwd
 
 function git_push() {
+
     echo "---------- ---------- ---------- ----------"
     git add .
     git commit -m "feat: subject..."
@@ -13,6 +14,7 @@ function git_push() {
     echo "---------- ---------- ---------- ----------"
     # git pull origin main --rebase
     git push origin main
+
     }
 
 git_push
