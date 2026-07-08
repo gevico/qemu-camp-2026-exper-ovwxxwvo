@@ -1,9 +1,11 @@
 [package]
 name = "i2c"
 version = "0.1.0"
-description = "Rust bindings for QEMU/i2c"
+description = "i2c device model for QEMU"
 resolver = "2"
 publish = false
+
+[dependencies]
 
 [lints]
 workspace = true
