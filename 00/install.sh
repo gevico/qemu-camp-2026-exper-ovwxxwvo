@@ -34,3 +34,7 @@ make -f Makefile.camp build
 echo "---------- ---------- ---------- ----------"
 make -f Makefile.camp test-rust
 
+echo "---------- ---------- ---------- ----------"
+cd ./rust
+cargo clean
+

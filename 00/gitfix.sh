@@ -11,9 +11,8 @@ function git_fix() {
     echo "---------- ---------- ---------- ----------"
     # git stash
     git fetch upstream
-    git reset --hard upstream/main
-    echo "---------- ---------- ---------- ----------"
-    git checkout -b "$branch"
+    git checkout -b "$branch" upstream/main
+    # git reset --hard upstream/"$branch"
 
     echo "---------- ---------- ---------- ----------"
     read -p "Press Enter to continue after fix."
