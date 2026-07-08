@@ -1,0 +1,9 @@
+[package]
+name = "i2c"
+version = "0.1.0"
+description = "Rust bindings for QEMU/i2c"
+resolver = "2"
+publish = false
+
+[lints]
+workspace = true

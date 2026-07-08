@@ -15,7 +15,7 @@
 //! - [`I2CSlave`]: trait for I2C slave devices (send, recv, event)
 //! - [`I2CBus`]: bus that manages slave devices and routes transfers
 
-// pub mod bus;
+pub mod bus;
 
 // ─── I2C Event ───────────────────────────────────────────────────────
 
@@ -49,7 +49,6 @@ pub trait I2CSlave {
     ///
     /// For `StartRecv`/`StartSend`, return 0 to ACK or non-zero to NACK.
     /// For `Finish`/`Nack`, the return value is ignored.
-    // fn event(&mut self, event: I2CEvent) -> i32 {
     fn event(&mut self, event: I2CEvent) -> i32 {
         let _ = event;
         0
@@ -91,6 +90,7 @@ impl I2CBus {
     /// Attach a slave device to the bus.
     pub fn attach(&mut self, _device: Box<dyn I2CSlave>) {
         // TODO: push the device onto the bus
+
 
     }
 
