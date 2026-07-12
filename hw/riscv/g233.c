@@ -29,6 +29,7 @@
 #include "hw/core/qdev-properties.h"
 #include "hw/char/serial-mm.h"
 #include "hw/char/pl011.h"
+#include "hw/i2c/i2c_gpio.h"
 #include "target/riscv/cpu.h"
 #include "hw/core/sysbus-fdt.h"
 #include "target/riscv/pmu.h"
@@ -94,6 +95,7 @@ static const MemMapEntry virt_memmap[] = {
     [VIRT_APLIC_M] =      {  0xc000000, APLIC_SIZE(VIRT_CPUS_MAX) },
     [VIRT_APLIC_S] =      {  0xd000000, APLIC_SIZE(VIRT_CPUS_MAX) },
     [VIRT_UART0] =        { 0x10000000,         0x100 },
+    [VIRT_I2C_GPIO] =     { 0x10013000,         0x100 },
     [VIRT_VIRTIO] =       { 0x10001000,        0x1000 },
     [VIRT_FW_CFG] =       { 0x10100000,          0x18 },
     [VIRT_FLASH] =        { 0x20000000,     0x4000000 },
@@ -1711,6 +1713,7 @@ static void virt_machine_init(MachineState *machine)
     pl011_create(s->memmap[VIRT_UART0].base,
                  qdev_get_gpio_in(mmio_irqchip, UART0_IRQ),
                  serial_hd(0));
+    i2c_gpio_create(s->memmap[VIRT_I2C_GPIO].base);
 
     sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,
         qdev_get_gpio_in(mmio_irqchip, RTC_IRQ));

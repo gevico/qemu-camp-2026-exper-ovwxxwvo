@@ -1,0 +1,30 @@
+[package]
+name = "i2c_gpio"
+version = "0.1.0"
+authors = [""]
+description = "gpio-i2c device model for QEMU"
+resolver = "2"
+publish = false
+
+edition.workspace = true
+homepage.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+glib-sys.workspace = true
+bilge      = { version = "0.2.0" }
+bilge-impl = { version = "0.2.0" }
+bits       = { path    = "../../../bits" }
+migration  = { path    = "../../../migration" }
+common     = { path    = "../../../common" }
+system     = { path    = "../../../system" }
+qom        = { path    = "../../../qom" }
+bql        = { path    = "../../../bql" }
+hwcore     = { path    = "../../../hw/core" }
+util       = { path    = "../../../util" }
+# trace      = { path    = "../../../trace" }
+
+[lints]
+workspace = true

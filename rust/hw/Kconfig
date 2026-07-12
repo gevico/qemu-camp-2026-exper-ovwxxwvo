@@ -1,4 +1,4 @@
 # devices Kconfig
-source char/Kconfig
 source i2c/Kconfig
+source char/Kconfig
 source timer/Kconfig

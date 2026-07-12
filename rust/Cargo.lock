@@ -191,6 +191,31 @@ dependencies = [
 [[package]]
 name = "i2c"
 version = "0.1.0"
+dependencies = [
+ "bilge",
+ "bilge-impl",
+ "bits",
+ "common",
+ "glib-sys",
+ "migration",
+]
+
+[[package]]
+name = "i2c_gpio"
+version = "0.1.0"
+dependencies = [
+ "bilge",
+ "bilge-impl",
+ "bits",
+ "bql",
+ "common",
+ "glib-sys",
+ "hwcore",
+ "migration",
+ "qom",
+ "system",
+ "util",
+]
 
 [[package]]
 name = "indexmap"

@@ -1,2 +1,5 @@
 config X_I2C_RUST
     bool
+
+config X_I2C_GPIO_RUST
+    bool

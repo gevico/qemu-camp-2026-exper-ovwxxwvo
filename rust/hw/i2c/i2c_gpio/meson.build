@@ -1,52 +1,54 @@
 
-_libpl011_bindings_inc_rs = rust.bindgen(
+_lib_i2c_gpio_bindings_inc_rs = rust.bindgen(
     args: bindgen_args_common + [
         '--allowlist-file',
-        meson.project_source_root() / 'include/hw/char/pl011.h',
+        meson.project_source_root() / 'include/hw/i2c/i2c_gpio.h',
         '--blocklist-file',
         meson.project_source_root() / 'include/(block\|chardev/|exec/|hw/core/|qemu/|qom/|system/).*',
+        '--opaque-type',
+        'Error',
     ],
     kwargs: bindgen_kwargs,
 )
 
-_libpl011_rs = static_library(
-    'pl011',
+_lib_i2c_gpio_rs = static_library(
+    'i2c_gpio_rs',
     structured_sources(
         [
             'src/lib.rs',
-            'src/bindings.rs',
-            'src/device.rs',
             'src/registers.rs',
+            'src/device.rs',
+            'src/bindings.rs',
         ],
-        {'.': _libpl011_bindings_inc_rs},
+        {'.': _lib_i2c_gpio_bindings_inc_rs},
     ),
     override_options: ['rust_std=2021', 'build.rust_std=2021'],
     rust_abi: 'rust',
     link_with: [
-        _util_rs,
-        _migration_rs,
-        _bql_rs,
-        _qom_rs,
-        _chardev_rs,
         _system_rs,
+        _util_rs,
+        _qom_rs,
+        _bql_rs,
         _hwcore_rs,
+        _migration_rs,
         _trace_rs,
     ],
     dependencies: [
+        glib_sys_rs,
         bilge_rs,
         bilge_impl_rs,
         bits_rs,
         common_rs,
-        glib_sys_rs,
     ],
 )
 
 rust_devices_ss.add(
-    when: 'CONFIG_X_PL011_RUST',
+    when: 'CONFIG_X_I2C_GPIO_RUST',
     if_true: [
         declare_dependency(
-            link_whole: [_libpl011_rs],
-            variables: {'crate': 'pl011'},
+            link_whole: [_lib_i2c_gpio_rs],
+            variables: {'crate': 'i2c_gpio_rs'},
         ),
     ],
 )
+
