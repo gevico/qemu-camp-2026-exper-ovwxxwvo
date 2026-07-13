@@ -3,6 +3,32 @@
 QEMU device demo based on QOM framework.  
 
 ____  
+### 🌱 Soc  
+
+```  
+  -------------------------  
+  | uart| i2c | spi | i2s | controller  
+  -------------------------  
+  | gpu | gpu | npu | tpu | processor  
+  -------------------------  
+  | cpu | cpu | cpu | cpu | processor  
+  -------------------------  
+```  
+
+____  
+### 🌱 Data Flow  
+
+```  
+   /-tx->- stop+8data+start ->-\ /-<- start+8data+stop -<-tx-\  
+uart device                     |                       uart controller  
+   \-rx-<- start+8data+stop -<-/ \->- stop+8data+start ->-rx-/  
+
+   /-sda-<->- start+7addr(tx)+ack|nack(rx)+8data(tx)+ack|nack(rx)+stop -<->-sda-\  
+i2c device                                                                  i2c controller  
+   \-scl-<--- ------          ...12345678...123456789...         ----- ---<-scl-/  
+```  
+
+____  
 ### 🌱 Related File  
 
 ```  

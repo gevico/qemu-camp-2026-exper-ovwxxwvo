@@ -112,8 +112,24 @@ impl I2CGPIORegisters {
 
     pub(self) fn write(&mut self, offset: RegisterOffset, value: u32, _device: &I2CGPIOState) -> bool {
         use RegisterOffset::*;
+                        // self.status.set_ack(true);
         match offset {
-            CTRL     => self.ctrl     = Ctrl::from(value),
+            CTRL     => {
+                let ctrl = Ctrl::from(value);
+                match (ctrl.en(), ctrl.start(), ctrl.stop()) {
+                    (true, true, _) => {
+                        self.status.set_busy(true);
+                        self.status.set_ack(true);
+                        self.status.set_done(true);
+                    },
+                    (true, _, true) => {
+                        self.status.set_busy(false);
+                        self.status.set_done(true);
+                    },
+                    _ => {},
+                };
+                self.ctrl = ctrl
+            },
             STATUS   => self.status   = Status::from(value),
             ADDR     => self.addr     = Addr::from(value),
             DATA     => self.data     = value,
@@ -180,18 +196,13 @@ impl I2CGPIOState {
     }
 
     fn write(&self, offset: hwaddr, value: u64, _size: u32) {
-        let mut update_irq = false;
-        if let Ok(field) = RegisterOffset::try_from(offset) {
-            // trace::trace_i2c_write(offset, value as u32, c"");
-            update_irq = self.regs.borrow_mut().write(field, value as u32, self);
+        if let Ok(reg) = RegisterOffset::try_from(offset) {
+            self.regs.borrow_mut().write(reg, value as u32, self);
         } else {
             log_mask_ln!(
                 Log::GuestError,
                 "I2CState::write: Bad offset {offset} value {value}"
             );
-        }
-        if update_irq {
-            self.update();
         }
     }
 
