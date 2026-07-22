@@ -10,7 +10,7 @@ pub struct AT24C02Slave {
     pub regs: [u8; 256],
     pub pointer: u8,
     pub first_byte: bool,
-    }
+}
 
 impl AT24C02Slave {
     pub fn new(addr: u8) -> Self {
@@ -21,7 +21,7 @@ impl AT24C02Slave {
             first_byte: true,
         }
     }
-    }
+}
 
 impl I2CSlave for AT24C02Slave {
     fn address(&self) -> u8 {
@@ -42,14 +42,20 @@ impl I2CSlave for AT24C02Slave {
     }
 
     fn send(&mut self, data: u8) -> i32 {
+        const PAGE_MASK: u8 = 0x07;
         if self.first_byte {
             self.pointer = data;
             self.first_byte = false;
         } else {
+            let offset = self.pointer & PAGE_MASK;
             self.regs[self.pointer as usize] = data;
-            self.pointer = self.pointer.wrapping_add(1);
+            if offset < 7 {
+                self.pointer = self.pointer + 1;
+            } else {
+                self.pointer = self.pointer & !PAGE_MASK;
+            }
         }
         0
     }
-    }
+}
 

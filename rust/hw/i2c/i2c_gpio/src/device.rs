@@ -110,7 +110,7 @@ impl I2CGPIORegisters {
             DATA     => self.data     = value,
             CTRL     => {
                 let mut i2c_bus = device.i2c_bus.borrow_mut();
-                let ctrl = Ctrl::from(value);
+                let mut ctrl = Ctrl::from(value);
                 match (ctrl.en(), ctrl.start(), ctrl.stop(), ctrl.rw()) {
                     (true, true, false, _) => {
                         let addr = u32::from(self.addr) as u8;
@@ -141,6 +141,8 @@ impl I2CGPIORegisters {
                     },
                     _ => {},
                 };
+                ctrl.set_start(false);
+                ctrl.set_stop(false);
                 self.ctrl = ctrl
             },
             STATUS   => self.status   = Status::from(value),
