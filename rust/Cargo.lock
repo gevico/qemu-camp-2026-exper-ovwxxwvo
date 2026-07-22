@@ -15,6 +15,25 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c84fc003e338a6f69fbd4f7fe9f92b535ff13e9af8997f3b14b6ddff8b1df46d"
 
 [[package]]
+name = "at24c02_slave"
+version = "0.1.0"
+dependencies = [
+ "bilge",
+ "bilge-impl",
+ "bits",
+ "bql",
+ "common",
+ "glib-sys",
+ "hwcore",
+ "i2c_core",
+ "i2c_gpio",
+ "migration",
+ "qom",
+ "system",
+ "util",
+]
+
+[[package]]
 name = "attrs"
 version = "0.2.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -189,7 +208,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "i2c"
+name = "i2c_core"
 version = "0.1.0"
 dependencies = [
  "bilge",
@@ -211,10 +230,25 @@ dependencies = [
  "common",
  "glib-sys",
  "hwcore",
+ "i2c_core",
+ "i2c_slave",
  "migration",
  "qom",
  "system",
  "util",
+]
+
+[[package]]
+name = "i2c_slave"
+version = "0.1.0"
+dependencies = [
+ "bilge",
+ "bilge-impl",
+ "bits",
+ "common",
+ "glib-sys",
+ "i2c_core",
+ "migration",
 ]
 
 [[package]]

@@ -1,8 +1,8 @@
 
-_i2c_gpio_bindings_inc_rs = rust.bindgen(
+_at24c02_slave_bindings_inc_rs = rust.bindgen(
     args: bindgen_args_common + [
         '--allowlist-file',
-        meson.project_source_root() / 'include/hw/i2c/i2c_gpio.h',
+        meson.project_source_root() / 'include/hw/i2c/at24c02_slave.h',
         '--blocklist-file',
         meson.project_source_root() / 'include/(block\|chardev/|exec/|hw/core/|qemu/|qom/|system/).*',
         '--opaque-type',
@@ -11,29 +11,27 @@ _i2c_gpio_bindings_inc_rs = rust.bindgen(
     kwargs: bindgen_kwargs,
 )
 
-_i2c_gpio_rs = static_library(
-    'i2c_gpio',
+_at24c02_slave_rs = static_library(
+    'at24c02_slave',
     structured_sources(
         [
             'src/lib.rs',
-            'src/registers.rs',
             'src/device.rs',
             'src/bindings.rs',
         ],
-        {'.': _i2c_gpio_bindings_inc_rs},
+        {'.': _at24c02_slave_bindings_inc_rs},
     ),
     override_options: ['rust_std=2021', 'build.rust_std=2021'],
     rust_abi: 'rust',
     link_with: [
         _i2c_core_rs,
-        _i2c_slave_rs,
+        _i2c_gpio_rs,
         _system_rs,
         _util_rs,
         _qom_rs,
         _bql_rs,
         _hwcore_rs,
         _migration_rs,
-        _trace_rs,
     ],
     dependencies: [
         glib_sys_rs,
@@ -45,11 +43,11 @@ _i2c_gpio_rs = static_library(
 )
 
 rust_devices_ss.add(
-    when: 'CONFIG_X_I2C_GPIO_RUST',
+    when: 'CONFIG_X_AT24C02_SLAVE_RUST',
     if_true: [
         declare_dependency(
-            link_whole: [_i2c_gpio_rs],
-            variables: {'crate': 'i2c_gpio'},
+            link_whole: [_at24c02_slave_rs],
+            variables: {'crate': 'at24c02_slave'},
         ),
     ],
 )

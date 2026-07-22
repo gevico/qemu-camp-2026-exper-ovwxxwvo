@@ -1,5 +1,11 @@
-config X_I2C_RUST
+config X_I2C_CORE_RUST
     bool
 
 config X_I2C_GPIO_RUST
+    bool
+
+config X_I2C_SLAVE_RUST
+    bool
+
+config X_AT24C02_SLAVE_RUST
     bool

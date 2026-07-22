@@ -12,27 +12,26 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef HW_I2C_GPIO_H
-#define HW_I2C_GPIO_H
+#ifndef HW_AT24C02_H
+#define HW_AT24C02_H
 
 #include "hw/core/sysbus.h"
 #include "qom/object.h"
 
-#define TYPE_I2C_GPIO "i2c-gpio"
-OBJECT_DECLARE_SIMPLE_TYPE(I2CGPIOState, I2C_GPIO)
+#define TYPE_AT24C02 "at24c02"
+OBJECT_DECLARE_SIMPLE_TYPE(AT24C02State, AT24C02)
 
-struct I2CGPIOState {
+struct AT24C02State {
     SysBusDevice parent_obj;
-    MemoryRegion iomem;
+    // MemoryRegion iomem;
     /*
      * Since some users embed this struct directly, we must
      * ensure that the C struct is at least as big as the Rust one.
      */
-    uint8_t padding_for_rust[128];
+    uint8_t padding_for_rust[512];
 };
 
-// DeviceState *i2c_gpio_create(hwaddr addr, qemu_irq irq);
-DeviceState *i2c_gpio_create(hwaddr addr);
+DeviceState *at24c02e_create(hwaddr addr);
 
 #endif
 

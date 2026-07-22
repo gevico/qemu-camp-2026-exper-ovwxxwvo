@@ -1,8 +1,8 @@
 [package]
-name = "i2c"
+name = "at24c02_slave"
 version = "0.1.0"
 authors = [""]
-description = "i2c device model for QEMU"
+description = ""
 resolver = "2"
 publish = false
 
@@ -19,11 +19,13 @@ bilge-impl = { version = "0.2.0" }
 bits       = { path    = "../../../bits" }
 migration  = { path    = "../../../migration" }
 common     = { path    = "../../../common" }
-# system     = { path    = "../../../system" }
-# qom        = { path    = "../../../qom" }
-# bql        = { path    = "../../../bql" }
-# hwcore     = { path    = "../../../hw/core" }
-# util       = { path    = "../../../util" }
+system     = { path    = "../../../system" }
+qom        = { path    = "../../../qom" }
+bql        = { path    = "../../../bql" }
+hwcore     = { path    = "../../../hw/core" }
+util       = { path    = "../../../util" }
+i2c_core   = { path    = "../../../hw/i2c/i2c_core" }
+i2c_gpio   = { path    = "../../../hw/i2c/i2c_gpio" }
 
 [lints]
 workspace = true

@@ -1,24 +1,24 @@
 
-_libi2c_rs = static_library(
-    'i2c_rs',
+_i2c_core_rs = static_library(
+    'i2c_core',
     structured_sources(
         [
             'src/lib.rs',
-            'src/device.rs',
-            'src/test.rs',
+            'src/core.rs',
+            # 'src/test.rs'
         ],
     ),
     override_options: ['rust_std=2021', 'build.rust_std=2021'],
     rust_abi: 'rust',
-    # link_with: [
-    #     _system_rs,
-    #     _util_rs,
-    #     _qom_rs,
-    #     _bql_rs,
-    #     _hwcore_rs,
-    #     _migration_rs,
-    #     _trace_rs,
-    # ],
+    link_with: [
+        # _system_rs,
+        # _util_rs,
+        # _qom_rs,
+        # _bql_rs,
+        # _hwcore_rs,
+        # _migration_rs,
+        # _trace_rs,
+    ],
     dependencies: [
         glib_sys_rs,
         bilge_rs,
@@ -29,11 +29,11 @@ _libi2c_rs = static_library(
 )
 
 rust_devices_ss.add(
-    when: 'CONFIG_X_I2C_RUST',
+    when: 'CONFIG_X_I2C_CORE_RUST',
     if_true: [
         declare_dependency(
-            link_whole: [_libi2c_rs],
-            variables: {'crate': 'i2c_rs'},
+            link_whole: [_i2c_core_rs],
+            variables: {'crate': 'i2c_core'},
         ),
     ],
 )
@@ -46,7 +46,7 @@ test(
         structured_sources(
             [
                 'src/lib.rs',
-                'src/device.rs',
+                'src/core.rs',
                 'src/test.rs',
             ],
         ),

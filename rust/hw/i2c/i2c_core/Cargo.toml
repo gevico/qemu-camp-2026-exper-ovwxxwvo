@@ -1,8 +1,8 @@
 [package]
-name = "i2c_gpio"
+name = "i2c_core"
 version = "0.1.0"
 authors = [""]
-description = "gpio-i2c device model for QEMU"
+description = "i2c core model for QEMU"
 resolver = "2"
 publish = false
 
@@ -19,13 +19,11 @@ bilge-impl = { version = "0.2.0" }
 bits       = { path    = "../../../bits" }
 migration  = { path    = "../../../migration" }
 common     = { path    = "../../../common" }
-system     = { path    = "../../../system" }
-qom        = { path    = "../../../qom" }
-bql        = { path    = "../../../bql" }
-hwcore     = { path    = "../../../hw/core" }
-util       = { path    = "../../../util" }
-i2c_core   = { path    = "../../../hw/i2c/i2c_core" }
-i2c_slave  = { path    = "../../../hw/i2c/i2c_slave" }
+# system     = { path    = "../../../system" }
+# qom        = { path    = "../../../qom" }
+# bql        = { path    = "../../../bql" }
+# hwcore     = { path    = "../../../hw/core" }
+# util       = { path    = "../../../util" }
 
 [lints]
 workspace = true

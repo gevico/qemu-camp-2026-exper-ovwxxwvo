@@ -1713,6 +1713,7 @@ static void virt_machine_init(MachineState *machine)
     pl011_create(s->memmap[VIRT_UART0].base,
                  qdev_get_gpio_in(mmio_irqchip, UART0_IRQ),
                  serial_hd(0));
+
     i2c_gpio_create(s->memmap[VIRT_I2C_GPIO].base);
 
     sysbus_create_simple("goldfish_rtc", s->memmap[VIRT_RTC].base,

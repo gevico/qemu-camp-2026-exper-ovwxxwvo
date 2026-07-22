@@ -1,9 +1,17 @@
 config I2C
     bool
 
+config I2C_CORE
+    bool
+    select X_I2C_CORE_RUST if HAVE_RUST
+
 config I2C_GPIO
     bool
     select X_I2C_GPIO_RUST if HAVE_RUST
+
+config I2C_SLAVE
+    bool
+    select X_I2C_SLAVE_RUST if HAVE_RUST
 
 config I2C_DEVICES
     # Device group for i2c devices which can reasonably be user-plugged

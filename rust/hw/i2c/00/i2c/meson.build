@@ -55,50 +55,50 @@ rust_devices_ss.add(
     ],
 )
 
-# test(
-#     'rust-i2c-unit',
-#     executable(
-#         'rust-i2c-unit',
-#         # files('src/lib.rs', 'src/bus.rs'),
-#         structured_sources(
-#             [
-#                 'src/lib.rs',
-#                 'src/bus.rs',
-#                 'src/core.rs',
-#                 'src/device.rs',
-#                 'src/registers.rs',
-#                 'src/bindings.rs',
-#                 'src/test.rs',
-#             ],
-#             {'.': _libi2c_bindings_inc_rs},
-#         ),
-#         rust_args: ['--test'],
-#         install: false,
-#         # dependencies: [common_rs]
-#         link_with: [
-#             _system_rs,
-#             _util_rs,
-#             _qom_rs,
-#             _bql_rs,
-#             _hwcore_rs,
-#             _migration_rs,
-#             _trace_rs,
-#         ],
-#         dependencies: [
-#             glib_sys_rs,
-#             bilge_rs,
-#             bilge_impl_rs,
-#             bits_rs,
-#             common_rs,
-#         ],
-#     ),
-#     args: [
-#         '--test',
-#         '--test-threads',
-#         '1',
-#         '--format',
-#         'pretty',
-#     ],
-#     protocol: 'rust',
-#     suite: ['unit', 'rust'],
-# )
+test(
+    'rust-i2c-unit',
+    executable(
+        'rust-i2c-unit',
+        # files('src/lib.rs', 'src/bus.rs'),
+        structured_sources(
+            [
+                'src/lib.rs',
+                'src/bus.rs',
+                'src/core.rs',
+                'src/device.rs',
+                'src/registers.rs',
+                'src/bindings.rs',
+                'src/test.rs',
+            ],
+            {'.': _libi2c_bindings_inc_rs},
+        ),
+        rust_args: ['--test'],
+        install: false,
+        # dependencies: [common_rs]
+        link_with: [
+            _system_rs,
+            _util_rs,
+            _qom_rs,
+            _bql_rs,
+            _hwcore_rs,
+            _migration_rs,
+            _trace_rs,
+        ],
+        dependencies: [
+            glib_sys_rs,
+            bilge_rs,
+            bilge_impl_rs,
+            bits_rs,
+            common_rs,
+        ],
+    ),
+    args: [
+        '--test',
+        '--test-threads',
+        '1',
+        '--format',
+        'pretty',
+    ],
+    protocol: 'rust',
+    suite: ['unit', 'rust'],
+)

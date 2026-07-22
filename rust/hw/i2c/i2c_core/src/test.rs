@@ -1,4 +1,4 @@
-// Copyright 2024 HUST OpenAtom Open Source Club.
+// Copyright 2023 HUST OpenAtom Open Source Club.
 // Author(s): Chen Miao <chenmiao@openatom.club>
 // Author(s): Chao Liu <chao.liu@openatom.club>
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -8,7 +8,7 @@
 #[cfg(test)]
 mod tests {
     // use super::*;
-    use crate::device::*;
+    use crate::core::*;
 
     /// Mock EEPROM device: 256-byte register file, supports I2C protocol.
     /// Write: first byte = register address, subsequent bytes = data.

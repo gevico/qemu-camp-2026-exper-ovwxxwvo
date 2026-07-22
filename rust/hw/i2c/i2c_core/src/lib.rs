@@ -17,6 +17,6 @@
 
 // pub mod bus;
 // pub use crate::{I2CBus, I2CEvent, I2CSlave};
-pub mod device;
+pub mod core;
 mod test;
 

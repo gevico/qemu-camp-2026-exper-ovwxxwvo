@@ -145,6 +145,7 @@ impl I2CBus {
         if let Some(slave) = self.devices.iter_mut().find(|dev| dev.address()==self.current_addr.unwrap()) {
             slave.event(I2CEvent::Finish);
         }
+        self.current_addr = None;
     }
 
     /// Send a data byte from master to the current slave.
